@@ -25,6 +25,12 @@ load_dotenv()
 
 ALLOW_ORIGINS = os.getenv("ALLOW_ORIGINS")
 
+allowed_origins = [
+    origin.strip()
+    for origin in ALLOW_ORIGINS.split(",")
+    if origin.strip()
+]
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -33,7 +39,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        ALLOW_ORIGINS,
+        allowed_origins,
     ],
     allow_credentials=False,
     allow_methods=["*"],
