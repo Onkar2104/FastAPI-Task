@@ -23,6 +23,14 @@ class StudentResponse(BaseModel):
         from_attributes = True
 
 
+class StudentPage(BaseModel):
+    items: list[StudentResponse]
+    page: int
+    limit: int
+    total: int
+    total_pages: int
+
+
 
 class UserCreate(BaseModel):
     name: str
